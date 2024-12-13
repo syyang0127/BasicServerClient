@@ -1,7 +1,17 @@
-FROM python:3.10-slim
+# 1. Base image
+FROM python:3.9-slim
 
-# ###
-#
-# 다음 주석을 지우고 docker 파일을 완성하자.
-#
-# ###
+# 2. Set working directory
+WORKDIR /app
+
+# 3. Copy requirements file
+COPY requirements.txt .
+
+# 4. Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# 5. Copy the client source code
+COPY . .
+
+# 6. Command to run the client application
+CMD ["python", "client.py"]
